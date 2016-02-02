@@ -1,5 +1,7 @@
 # WaitForIt
 
+[![Build Status](https://travis-ci.org/schneems/wait_for_it.svg?branch=master)](https://travis-ci.org/schneems/wait_for_it)
+
 Spawns processes and waits for them so you can integration test really complicated things with determinism. For inspiration behind why you should use something like this check out my talk [Testing the Untestable](https://www.youtube.com/watch?v=QHMKIHkY1nM). You can test long running processes such as webservers, or features that require concurrency or libraries that use global configuration.
 
 Don't add `sleep` to your tests, instead...
