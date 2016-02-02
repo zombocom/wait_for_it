@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["schneems"]
   spec.email         = ["richard.schneeman@gmail.com"]
 
-  spec.summary       = %q{: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{: Write a longer description or delete this line.}
-  spec.homepage      = ""
+  spec.summary       = %q{ Stop sleeping in your tests, instead wait for it... }
+  spec.description   = %q{ Make your complicated integration tests more deterministic with wait for it}
+  spec.homepage      = "https://github.com/schneems/wait_for_it"
   spec.license       = "MIT"
 
 
