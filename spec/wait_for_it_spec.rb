@@ -5,6 +5,18 @@ describe WaitForIt do
     expect(WaitForIt::VERSION).not_to be nil
   end
 
+  it "sends TERM to child on exit" do
+    options = { wait_for: "booted" }
+
+    WaitForIt.new("ruby #{ fixture_path("never_exits.rb") }", options) do |spawn|
+      spawn.send(:shutdown)
+      count_before = spawn.count("running")
+      sleep 1
+      count_after = spawn.count("running")
+      expect(count_before).to eq(count_after)
+    end
+  end
+
   it "raises an error if a process takes too long to boot" do
     expect {
       options = { timeout: 1, env: { SLEEP: 10 }, wait_for: "Done" }
@@ -41,7 +53,7 @@ describe WaitForIt do
   describe 'wait!' do
     it 'raises if process takes too long too long' do
       expect {
-        options = { env: { SLEEP: 10 }, wait_for: "Started"}
+        options = { env: { SLEEP: 100 }, wait_for: "Started"}
         WaitForIt.new("ruby #{ fixture_path("sleep.rb") }", options) do |spawn|
           spawn.wait!("Done", 1)
         end

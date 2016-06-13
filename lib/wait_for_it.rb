@@ -94,6 +94,10 @@ class WaitForIt
         cleanup
       end
     end
+
+  rescue WaitForItTimeoutError => e
+    cleanup
+    raise e
   end
 
   attr_reader :timeout, :log
@@ -140,11 +144,23 @@ class WaitForIt
   # Kills the process and removes temporary files
   def cleanup
     shutdown
-    @tmp_file.close
-    @log.unlink
+    close_log
+    unlink_log
   end
 
 private
+
+  def close_log
+    @tmp_file.close if @tmp_file
+  end
+
+  def unlink_log
+    @log.unlink if @log
+  rescue Errno::ENOENT
+    # File already unlinked
+  end
+
+
   def set_log
     @tmp_file  = Tempfile.new(["wait_for_it", ".log"])
     log_file   = Pathname.new(@tmp_file)
@@ -153,9 +169,11 @@ private
   end
 
   def spawn(command, redirection, env_hash = {})
-    env     = env_hash.map {|key, value| "#{ key.to_s.shellescape }=#{ value.to_s.shellescape }" }.join(" ")
-    command = "/usr/bin/env #{ env } bash -c #{ command.shellescape } #{ redirection } #{ log }"
-    @pid = Process.spawn("#{ command }")
+    env = {}
+    env_hash.each {|k, v| env[k.to_s] = v.to_s }
+
+    # Must exec so when we kill the PID it kills the child process
+    @pid = Process.spawn(env, "exec #{ command } #{ redirection } #{ log }")
   end
 
   def convert_to_regex(input)
