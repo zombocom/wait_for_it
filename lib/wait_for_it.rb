@@ -169,9 +169,11 @@ private
   end
 
   def spawn(command, redirection, env_hash = {})
-    env     = env_hash.map {|key, value| "#{ key.to_s.shellescape }=#{ value.to_s.shellescape }" }.join(" ")
-    command = "/usr/bin/env #{ env } bash -c #{ command.shellescape } #{ redirection } #{ log }"
-    @pid = Process.spawn("#{ command }")
+    env = {}
+    env_hash.each {|k, v| env[k.to_s] = v.to_s }
+
+    # Must exec so when we kill the PID it kills the child process
+    @pid = Process.spawn(env, "exec #{ command } #{ redirection } #{ log }")
   end
 
   def convert_to_regex(input)
