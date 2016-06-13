@@ -94,6 +94,10 @@ class WaitForIt
         cleanup
       end
     end
+
+  rescue WaitForItTimeoutError => e
+    cleanup
+    raise e
   end
 
   attr_reader :timeout, :log
@@ -140,11 +144,23 @@ class WaitForIt
   # Kills the process and removes temporary files
   def cleanup
     shutdown
-    @tmp_file.close
-    @log.unlink
+    close_log
+    unlink_log
   end
 
 private
+
+  def close_log
+    @tmp_file.close if @tmp_file
+  end
+
+  def unlink_log
+    @log.unlink if @log
+  rescue Errno::ENOENT
+    # File already unlinked
+  end
+
+
   def set_log
     @tmp_file  = Tempfile.new(["wait_for_it", ".log"])
     log_file   = Pathname.new(@tmp_file)
