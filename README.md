@@ -49,7 +49,7 @@ So you can see that when `booted` makes its way to the stdout we know it has ful
 ```ruby
 require 'wait_for_it'
 
-WaitForIt.new("bundle exec puma", wait_for: "booted") do |spawn
+WaitForIt.new("bundle exec puma", wait_for: "booted") do |spawn|
   # ...
 end
 ```
