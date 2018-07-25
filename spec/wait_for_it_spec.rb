@@ -59,5 +59,12 @@ describe WaitForIt do
         end
       }.to raise_error(WaitForIt::WaitForItTimeoutError)
     end
+
+    it 'does not raise an error' do
+      options = { env: { SLEEP: 3 }, wait_for: "Started"}
+      WaitForIt.new("ruby #{ fixture_path("sleep.rb") }", options) do |spawn|
+        spawn.wait!("Done", 10)
+      end
+    end
   end
 end

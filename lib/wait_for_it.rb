@@ -131,7 +131,7 @@ class WaitForIt
 
   # Same as `wait` but raises an error if timeout is reached
   def wait!(input, t = timeout)
-    unless wait(input)
+    unless wait(input, t)
       options = {}
       options[:command] = @command
       options[:input]   = input
