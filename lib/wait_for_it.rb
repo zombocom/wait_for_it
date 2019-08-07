@@ -170,7 +170,7 @@ private
 
   def spawn(command, redirection, env_hash = {})
     env = {}
-    env_hash.each {|k, v| env[k.to_s] = v.to_s }
+    env_hash.each {|k, v| env[k.to_s] = v.nil? ? v : v.to_s }
 
     # Must exec so when we kill the PID it kills the child process
     @pid = Process.spawn(env, "exec #{ command } #{ redirection } #{ log }")
