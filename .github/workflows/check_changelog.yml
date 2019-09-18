@@ -1,0 +1,13 @@
+name: Ruby
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Check that CHANGELOG is touched
+      run: |
+        git diff ${{ github.head_ref }}...${{github.base_ref}} --name-only | grep CHANGELOG.md 
