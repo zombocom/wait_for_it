@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{ Stop sleeping in your tests, instead wait for it... }
   spec.description   = %q{ Make your complicated integration tests more deterministic with wait for it}
-  spec.homepage      = "https://github.com/schneems/wait_for_it"
+  spec.homepage      = "https://github.com/zombocom/wait_for_it"
   spec.license       = "MIT"
 
 
