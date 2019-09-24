@@ -1,6 +1,6 @@
 # WaitForIt
 
-[![Build Status](https://travis-ci.org/schneems/wait_for_it.svg?branch=master)](https://travis-ci.org/schneems/wait_for_it)
+[![Build Status](https://travis-ci.org/zombocom/wait_for_it.svg?branch=master)](https://travis-ci.org/zombocom/wait_for_it)
 
 Spawns processes and waits for them so you can integration test really complicated things with determinism. For inspiration behind why you should use something like this check out my talk [Testing the Untestable](https://www.youtube.com/watch?v=QHMKIHkY1nM). You can test long running processes such as webservers, or features that require concurrency or libraries that use global configuration.
 
@@ -26,7 +26,7 @@ Or install it yourself as:
 
 ## Usage
 
-> For actual usage examples check out the [specs](https://github.com/schneems/wait_for_it/blob/master/spec/wait_for_it_spec.rb).
+> For actual usage examples check out the [specs](https://github.com/zombocom/wait_for_it/blob/master/spec/wait_for_it_spec.rb).
 
 This library spawns processes (sorry, doesn't work on windows) and instead of sleeping a predetermined time to wait for that process to do something it reads in a log file until certain outputs are received. For example if you wanted to test booting up a puma webserver, manually when you start it you might get this output
 
@@ -163,7 +163,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/schneems/wait_for_it. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/zombocom/wait_for_it. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
