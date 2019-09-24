@@ -11,4 +11,4 @@ jobs:
     - uses: actions/checkout@v1
     - name: Check that CHANGELOG is touched
       run: |
-        git diff remotes/origin/${{ github.base_ref }} --name-only | grep CHANGELOG.md
+        cat $GITHUB_EVENT_PATH | jq .pull_request.title | grep -i '\[ci skip\]' || $( git diff remotes/origin/${{ github.base_ref }} --name-only | grep CHANGELOG.md )
