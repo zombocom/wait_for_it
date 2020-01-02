@@ -19,6 +19,10 @@ class WaitForIt
   DEFAULT_TIMEOUT = 10 # seconds
   DEFAULT_OUT     = ">>"
   DEFAULT_ENV     = {}
+  @wait_for = nil
+  @timeout = nil
+  @redirection = nil
+  @env = nil
 
   # Configure global WaitForIt settings
   def self.config
