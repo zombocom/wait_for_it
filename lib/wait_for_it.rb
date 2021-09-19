@@ -72,12 +72,12 @@ class WaitForIt
   #
   # @param [String] command Command to spawn
   # @param [Hash] options
-  # @options options [Fixnum] :timeout The duration to wait a commmand to boot, default is 10 seconds
-  # @options options [String] :wait_for The output the process emits when it has successfully booted.
+  # @option options [Fixnum] :timeout The duration to wait a commmand to boot, default is 10 seconds
+  # @option options [String] :wait_for The output the process emits when it has successfully booted.
   #   When present the calling process will block until the message is received in the log output
   #   or until the timeout is hit.
-  # @options options [String] :redirection The shell redirection used to pipe to log file
-  # @options options [Hash]   :env Keys and values for environment variables in the process
+  # @option options [String] :redirection The shell redirection used to pipe to log file
+  # @option options [Hash]   :env Keys and values for environment variables in the process
   def initialize(command, options = {})
     @command    = command
     @timeout    = options[:timeout]     || WaitForIt.timeout
